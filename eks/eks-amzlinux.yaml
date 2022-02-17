@@ -2,9 +2,9 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 metadata:
   #Cluster name, region, and cluster version
-  name: cluster-mamba
+  name: cluster-mamba-new-hcm
   region: ap-southeast-1
-  version: "1.15"
+  version: "1.20"
 
 # If we don't define an exist vpc, eksctl will create a new vpc, 
 # public and private subnet
@@ -37,16 +37,16 @@ vpc:
 
 # Role used by the EKS control plane itself when managing resources
 iam:
-  serviceRoleARN: "arn:aws:iam::xxxxxxxxxxx:role/EKSServiceRole"
+  serviceRoleARN: "arn:aws:iam::665766959876:role/EKSTestRole"
 
 # Here we only have only 1 node group that consists only T3.medium instances
 # In a production environment, it is recommended to have separated NodeGroups for different types of service.
 nodeGroups:
-  - name: nodeGroup-mamba
+  - name: nodeGroup-mamba-test
     # Size section
-    desiredCapacity: 3
+    desiredCapacity: 2
     minSize: 2
-    maxSize: 5
+    maxSize: 2
     instanceType: t3.medium
     volumeSize: 50
     volumeType: gp2
@@ -72,18 +72,18 @@ nodeGroups:
     #amiFamily: Ubuntu1804
 
     #AmazonLinux AMI and Family
-    ami: ami-0d275f57a60281ccc
+    ami: ami-0288f0f29ae574292 #eks 1.20 
     amiFamily: AmazonLinux2
     volumeEncrypted: true
     #Isolate nodegroup from the public internet
     privateNetworking: true
     #When define privateNetworking, ssh port can only be accessed inside VPC
     ssh:
-      publicKeyName: workernode-cluster-mamba
+      publicKeyName: workernode-cluster-mamba-hcm	
     iam:
       attachPolicyARNs:
-        - arn:aws:iam::xxxxxxxxxxx:policy/k8s-asg-policy
-        - arn:aws:iam::xxxxxxxxxxx:policy/ingressController-iam-policy
-        - arn:aws:iam::xxxxxxxxxxx:policy/WorkerNodesRolePoliciesEKS
+        - arn:aws:iam::665766959876:policy/k8s-asg-policy
+        - arn:aws:iam::665766959876:policy/ingressController-iam-policy
+        - arn:aws:iam::665766959876:policy/WorkerNodesRolePoliciesEKS
         - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
         - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
