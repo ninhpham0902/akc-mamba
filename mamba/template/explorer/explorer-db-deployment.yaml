@@ -37,7 +37,7 @@ spec:
       name: explorer-pvc
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: gp2
+      storageClassName: xplat-nfs
       resources:
         requests:
           storage: 5Gi

@@ -72,7 +72,7 @@ spec:
       name: {{ICA_NAME}}-pvc
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: gp2
+      storageClassName: xplat-nfs
       resources:
         requests:
           storage: 5Gi

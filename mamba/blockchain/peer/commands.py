@@ -58,7 +58,7 @@ def setup_peer(peer, index):
     if settings.K8S_TYPE == 'minikube':
         storage_class = 'standard'
     else:
-        storage_class = 'gp2'
+        storage_class = 'xplat-nfs'
 
     dict_env = {
         'PEER_ORG': peer,
