@@ -24,7 +24,7 @@ def init():
     global K8S_TYPE
     K8S_TYPE = os.getenv('K8S_TYPE')
     if K8S_TYPE == 'eks':
-        PVS_PATH = '/exports'
+        PVS_PATH = '/nfs'
     else:
         PVS_PATH = '/exports'
 
