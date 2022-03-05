@@ -4,8 +4,6 @@ kind: Service
 metadata:
   name: {{RCA_NAME}}-nlb
   namespace: {{ORG}}
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
 spec:
   selector:
     app: hyperledger
@@ -17,4 +15,4 @@ spec:
     protocol: TCP
     port: 7054
     targetPort: 7054
-  type: LoadBalancer
+  type: ClusterIp

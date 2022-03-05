@@ -170,7 +170,7 @@ spec:
       - name: crypto-config
         nfs:
           server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/crypto-config/{{PEER_ORG}}.{{PEER_DOMAIN}}
+          path: {{PVS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/crypto-config/{{PEER_ORG}}.{{PEER_DOMAIN}}
       - name: builders-config
         configMap:
           name: builders-config
@@ -180,7 +180,7 @@ spec:
       - name: external-builder
         nfs:
           server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/buildpack/bin/
+          path: {{PVS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/buildpack/bin/
       - name: dockersocket
         hostPath:
           path: /var/run/docker.sock
