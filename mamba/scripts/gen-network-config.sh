@@ -208,7 +208,7 @@ channels:
         getDomain $org
         for (( peerNum=0; peerNum<$NUM_PEERS; peerNum++ ))
         do  
-          if [ "$peerNum" == "0" && "$org" == "fho-prod" ]; then
+          if [ "$peerNum" == "0" ]; then
             echo "
       peer$peerNum-$org.$DOMAIN:
         endorsingPeer: true
@@ -216,14 +216,6 @@ channels:
         ledgerQuery: true
         eventSource: true
           "
-          elif [ "$peerNum" == "0" && "$org" != "fho-prod" ]; then
-            echo "
-      peer$peerNum-$org.$DOMAIN:
-        endorsingPeer: false
-        chaincodeQuery: true
-        ledgerQuery: true
-        eventSource: true
-          "         
           else
             echo "
       peer$peerNum-$org.$DOMAIN:
