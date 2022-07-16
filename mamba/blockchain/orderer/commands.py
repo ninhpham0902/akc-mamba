@@ -37,7 +37,7 @@ def setup_orderer(orderer, index):
     if settings.K8S_TYPE == 'minikube':
         store_class = 'standard'
     else:
-        store_class = 'xplat-nfs'
+        store_class = 'nfs-client'
 
     dict_env = {
         'ORDERER': orderer,
