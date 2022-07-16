@@ -43,7 +43,7 @@ def setup_ica(ica_org):
 
     rca_host = settings.REMOTE_RCA_ADDRESS if settings.RCA_NAME == '' else '%s.%s' % (settings.RCA_NAME, settings.RCA_DOMAIN)
 
-    storage_class = 'standard' if settings.K8S_TYPE == 'minikube' else 'xplat-nfs'
+    storage_class = 'standard' if settings.K8S_TYPE == 'minikube' else 'nfs-client'
 
     rca_name = settings.RCA_NAME or settings.REMOTE_RCA_NAME
 
