@@ -31,7 +31,7 @@ def setup_rca():
     if settings.K8S_TYPE == 'minikube':
         storage_class = 'standard'
     else:
-        storage_class = 'xplat-nfs'
+        storage_class = 'default'
 
     dict_env = {
         'ORG': domain,
