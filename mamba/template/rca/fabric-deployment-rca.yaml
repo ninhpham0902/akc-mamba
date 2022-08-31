@@ -49,18 +49,15 @@ spec:
           - mountPath: /etc/hyperledger/fabric-ca
             name: {{RCA_NAME}}-pvc
           - mountPath: /scripts
-            name: rca-scripts
+            name: nfs
+            subPath: {{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts
           - mountPath: /data
-            name: rca-data
+            name: nfs
+            subPath: {{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data
      volumes:
-       - name: rca-scripts
-         nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/
-       - name: rca-data
-         nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
   volumeClaimTemplates:
   - metadata:
       name: {{RCA_NAME}}-pvc

@@ -25,11 +25,11 @@ spec:
         # args:  ["-c", "apk add bash; apk add curl; tail -f /etc/hosts; ./scripts/bootstrap-network.sh 2>&1;"]
         args:  ["-c", "apk add bash; apk add curl; ./scripts/bootstrap-network.sh 2>&1;"]
         volumeMounts:
-          - name: rca-scripts
+          - name: nfs
             mountPath: /scripts
+            subPath: {{EFS_EXTEND}}/akc-ca-scripts
       volumes:
-      - name: rca-scripts
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
 

@@ -155,32 +155,29 @@ spec:
         - containerPort: 9443
 
         volumeMounts:
-          - name: crypto-config
+          - name: nfs
             mountPath: /shared
+            subPath: {{EFS_EXTEND}}/akc-ca-data/crypto-config/{{PEER_ORG}}.{{PEER_DOMAIN}}
           - name: builders-config
             mountPath: /etc/hyperledger/fabric/core.yaml
             subPath: core.yaml
-          - name: external-builder
+          - name: nfs
             mountPath: /builders/external/bin
+            subPath: {{EFS_EXTEND}}/akc-ca-scripts/buildpack/bin
           - name: dockersocket
             mountPath: /host/var/run/docker.sock
           - name: peer{{PEER_INDEX}}-pvc-{{PEER_DOMAIN}}
             mountPath: /var/hyperledger/production
       volumes:
-      - name: crypto-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/crypto-config/{{PEER_ORG}}.{{PEER_DOMAIN}}
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
       - name: builders-config
         configMap:
           name: builders-config
           items:
             - key: core.yaml
               path: core.yaml
-      - name: external-builder
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/buildpack/bin/
       - name: dockersocket
         hostPath:
           path: /var/run/docker.sock

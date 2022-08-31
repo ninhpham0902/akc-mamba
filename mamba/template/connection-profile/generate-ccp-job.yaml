@@ -23,21 +23,15 @@ spec:
          args:  ["-c", "apk add bash; ./scripts/generate-ccp.sh 2>&1;"]
          volumeMounts:
           - mountPath: /scripts
-            name: scripts
+            name: nfs
+            subPath: {{EFS_EXTEND}}/akc-ca-scripts
           - mountPath: /data
-            name: data
+            name: nfs
+            subPath: {{EFS_EXTEND}}/akc-ca-data
           - mountPath: /shared/admin-v2/artifacts
-            name: artifacts
+            name: nfs
+            subPath: {{EFS_EXTEND}}/admin-v2/artifacts
      volumes:
-       - name: scripts
-         nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/
-       - name: data
-         nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/
-       - name: artifacts
-         nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/artifacts/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}

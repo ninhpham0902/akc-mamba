@@ -19,17 +19,14 @@ spec:
         # args:  ["-c", "ls -al /scripts/;"]
         args:  ["-c", "apk add bash; ./scripts/gen-network-config.sh 2>&1;"]
         volumeMounts:
-          - name: rca-scripts
+          - name: nfs
             mountPath: /scripts
-          - name: artifacts-efs
+            subPath: {{EFS_EXTEND}}/akc-ca-scripts
+          - name: nfs
             mountPath: /data/app/artifacts/
+            subPath: {{EFS_EXTEND}}/admin-v2/artifacts
       volumes:
-      - name: rca-scripts
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-scripts/
-      - name: artifacts-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/artifacts/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
       

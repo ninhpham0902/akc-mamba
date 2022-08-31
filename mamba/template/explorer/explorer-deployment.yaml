@@ -33,28 +33,19 @@ spec:
         - containerPort: 8080
         imagePullPolicy: Always
         volumeMounts:
-          - name: crypto-config
+          - name: nfs
             mountPath: /opt/explorer/crypto-config/
-          - name: explorer-config
+            subPath: {{EFS_EXTEND}}/akc-ca-data/crypto-config
+          - name: nfs
             mountPath: /opt/explorer/app/platform/fabric/config/
-          - name: crypto-store-efs
+            subPath: {{EFS_EXTEND}}/explorer-config
+          - name: nfs
             mountPath: /tmp/crypto-store/
-          - name: crypto-path-efs
+            subPath: {{EFS_EXTEND}}/admin/crypto-store
+          - name: nfs
             mountPath: /opt/explorer/crypto-path/
+            subPath: {{EFS_EXTEND}}/admin/crypto-path
       volumes:
-      - name: crypto-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/crypto-config/
-      - name: explorer-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/explorer-config/
-      - name: crypto-store-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin/crypto-store/
-      - name: crypto-path-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin/crypto-path/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}

@@ -34,10 +34,10 @@ spec:
         - containerPort: 9090
 
         volumeMounts:
-          - name: prometheus-config
+          - name: nfs
             mountPath: /etc/
+            subPath: {{EFS_PATH}}/{{EFS_EXTEND}}/promconfig
       volumes:
-      - name: prometheus-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/promconfig/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}

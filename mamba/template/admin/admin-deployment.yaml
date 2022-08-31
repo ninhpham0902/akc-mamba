@@ -57,31 +57,22 @@ spec:
         - name: ORDERER_CA
           value: /shared/crypto-config/{{ORGDERER_NAME}}.{{ORDERER_DOMAIN}}/orderers/orderer0-{{ORGDERER_NAME}}.{{ORDERER_DOMAIN}}/msp/tlsintermediatecerts/ica-{{ORGDERER_NAME}}-{{ORDERER_DOMAIN}}-7054.pem
         volumeMounts:
-          - name: akc-ca-data
+          - name: nfs
             mountPath: /shared/
-          - name: chaincodes
+            subPath: {{EFS_EXTEND}}/akc-ca-data
+          - name: nfs
             mountPath: /chaincodes
-          - name: artifacts-efs
+            subPath: {{EFS_EXTEND}}/admin-v2/chaincodes
+          - name: nfs
             mountPath: /data/app/artifacts/
-          - name: wallet
+            subPath: {{EFS_EXTEND}}/admin-v2/artifacts
+          - name: nfs
             mountPath: /data/app/wallet/
+            subPath: {{EFS_EXTEND}}/admin-v2/wallet
       volumes:
-      - name: akc-ca-data
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/
-      - name: chaincodes
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/chaincodes/
-      - name: artifacts-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/artifacts/
-      - name: wallet
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/wallet/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
       imagePullSecrets:
       - name: mamba
       

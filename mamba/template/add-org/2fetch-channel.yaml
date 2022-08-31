@@ -55,10 +55,10 @@ spec:
         # - name: CORE_PEER_TLS_ROOTCERT_FILE
         #   value: crypto-config/ordererOrganizations/orderertest/orderers/orderer1-orderer.orderertest/msp/tlscacerts/tlsca.orderertest-cert.pem
         volumeMounts:
-          - name: crypto-config
+          - name: nfs
             mountPath: /shared
+            subPath: {{EFS_EXTEND}}/akc-ca-data
       volumes:
-      - name: crypto-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}

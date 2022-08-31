@@ -98,15 +98,15 @@ spec:
         - containerPort: 7050
         - containerPort: 10443
         volumeMounts:
-          - name: crypto-config
+          - name: nfs
             mountPath: /shared
+            subPath: {{EFS_EXTEND}}/akc-ca-data
           - name: orderer{{ORDERER_INDEX}}-{{ORDERER_DOMAIN}}-pvc-akc
             mountPath: /var/ledger/orderer{{ORDERER_INDEX}}
       volumes:
-      - name: crypto-config
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
   volumeClaimTemplates:
   - metadata:
       name: orderer{{ORDERER_INDEX}}-{{ORDERER_DOMAIN}}-pvc-akc

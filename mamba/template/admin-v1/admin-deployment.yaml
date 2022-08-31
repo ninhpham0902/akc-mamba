@@ -27,30 +27,21 @@ spec:
         - name: NODE_ENV
           value: development
         volumeMounts:
-          - name: akc-ca-data
+          - name: nfs
             mountPath: /shared/
-          - name: crypto-store-efs
+            subPath: {{EFS_EXTEND}}/akc-ca-data
+          - name: nfs
             mountPath: /tmp/crypto-store/
-          - name: crypto-path-efs
+            subPath: {{EFS_EXTEND}}/admin/crypto-store
+          - name: nfs
             mountPath: /data/app/crypto-path/
-          - name: artifacts-efs
+            subPath: {{EFS_EXTEND}}/admin/crypto-path
+          - name: nfs
             mountPath: /data/app/artifacts/
+            subPath: {{EFS_EXTEND}}/admin-v2/artifacts
       volumes:
-      - name: akc-ca-data
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data/
-      - name: crypto-store-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin/crypto-store/
-      - name: crypto-path-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin/crypto-path/
-      - name: artifacts-efs
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/admin-v2/artifacts/
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}
       imagePullSecrets:
       - name: mamba

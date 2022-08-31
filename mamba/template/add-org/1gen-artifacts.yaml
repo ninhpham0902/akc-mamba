@@ -27,9 +27,9 @@ spec:
           cat {{ORG_NAME}}.json;
         volumeMounts:
         - mountPath: /data
-          name: sharedvolume
+          subPath: {{EFS_EXTEND}}/akc-ca-data
+          name: nfs
       volumes:
-      - name: sharedvolume
-        nfs:
-          server: {{EFS_SERVER}}
-          path: {{PVS_PATH}}/{{EFS_PATH}}/{{EFS_EXTEND}}/akc-ca-data
+      - name: nfs
+        persistentVolumeClaim: 
+          claimName: {{CLAIM_NAME}}    
