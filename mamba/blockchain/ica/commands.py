@@ -59,6 +59,7 @@ def setup_ica(ica_org):
         'EFS_PATH': settings.EFS_PATH,
         'EFS_EXTEND': settings.EFS_EXTEND,
         'PVS_PATH': settings.PVS_PATH,
+        'CLAIM_NAME': settings.CLAIM_NAME,
         'STORAGE_CLASS': storage_class
     }
     settings.k8s.apply_yaml_from_template(

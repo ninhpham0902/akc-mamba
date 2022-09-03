@@ -48,6 +48,7 @@ def setup_orderer(orderer, index):
         'EFS_PATH': settings.EFS_PATH,
         'EFS_EXTEND': settings.EFS_EXTEND,
         'PVS_PATH': settings.PVS_PATH,
+        'CLAIM_NAME': settings.CLAIM_NAME,
         'STORE_CLASS': store_class
     }
 

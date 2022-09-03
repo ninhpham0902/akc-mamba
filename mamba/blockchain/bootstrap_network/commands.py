@@ -27,7 +27,8 @@ def bootstrap_network():
         'EFS_SERVER': settings.EFS_SERVER,
         'EFS_PATH': settings.EFS_PATH,
         'EFS_EXTEND': settings.EFS_EXTEND,
-        'PVS_PATH': settings.PVS_PATH
+        'PVS_PATH': settings.PVS_PATH,
+        'CLAIM_NAME': settings.CLAIM_NAME
     }
 
     settings.k8s.apply_yaml_from_template(

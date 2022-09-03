@@ -70,6 +70,7 @@ def setup_peer(peer, index):
         'EFS_PATH': settings.EFS_PATH,
         'EFS_EXTEND': settings.EFS_EXTEND,
         'PVS_PATH': settings.PVS_PATH,
+        'CLAIM_NAME': settings.CLAIM_NAME,
         'STORAGE_CLASS': storage_class
     }
 

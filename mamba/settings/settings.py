@@ -50,6 +50,8 @@ def init():
     global EFS_POD
     global EFS_EXTEND
     global EFS_SERVER_ID
+    global CLAIM_NAME
+    CLAIM_NAME = os.getenv('CLAIM_NAME')
     EFS_SERVER = os.getenv('EFS_SERVER')
     EFS_PATH = os.getenv('EFS_PATH')
     EFS_ROOT = os.getenv('EFS_ROOT')

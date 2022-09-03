@@ -24,7 +24,8 @@ def update_anchor_peer(org):
         'EFS_SERVER': settings.EFS_SERVER,
         'EFS_PATH': settings.EFS_PATH,
         'EFS_EXTEND': settings.EFS_EXTEND,
-        'PVS_PATH': settings.PVS_PATH
+        'PVS_PATH': settings.PVS_PATH,
+        'CLAIM_NAME': settings.CLAIM_NAME
     }
     k8s_template_file = '%s/update-anchor-peer/fabric-deployment-anchor-peer.yaml' % util.get_k8s_template_path()
     settings.k8s.apply_yaml_from_template(
